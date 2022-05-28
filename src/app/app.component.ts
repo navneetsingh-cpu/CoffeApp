@@ -12,7 +12,8 @@ import { RootState } from './store/reducer';
 })
 export class AppComponent {
   error$: Observable<string>;
-  data$: Observable<any>;
+  data$: Observable<Coffee[]>;
+  coffeeList: Coffee[];
 
   constructor(private store: Store<{ rootState: RootState }>) {
     this.error$ = this.store.select(fromRoot.getStateError);
@@ -22,7 +23,14 @@ export class AppComponent {
 
   ngOnInit() {
     this.store.dispatch(fromRoot.ApiGetMockData({ id: 'randomId' }));
-    this.data$.subscribe((data) => { console.log('data', data) });
+    this.data$.subscribe((data: Coffee[]) => {
+
+      this.coffeeList = this.deepClone(data);
+    });
+  }
+
+  private deepClone(input: Coffee[]): Coffee[] {
+    return JSON.parse(JSON.stringify(input));
   }
 
 

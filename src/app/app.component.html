@@ -1,3 +1,25 @@
+<div class="menu-area section-gap">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let coffee of coffeeList">
+        <div class="single-menu">
+          <div class="title-div justify-content-between d-flex">
+            <h4>{{coffee.blend_name}}</h4>
+            <p class="origin float-right">
+              Variety: {{coffee.variety}}
+
+            </p>
+          </div>
+          <p>
+            Origin: {{coffee.origin}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <router-outlet></router-outlet>
 
