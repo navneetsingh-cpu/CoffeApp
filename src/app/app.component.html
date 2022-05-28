@@ -1,17 +1,16 @@
 <div class="menu-area section-gap">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4" *ngFor="let coffee of coffeeList">
+      <div class="col-lg-4" *ngFor="let coffee of visibleCoffeeList">
         <div class="single-menu">
           <div class="title-div justify-content-between d-flex">
             <h4>{{coffee.blend_name}}</h4>
             <p class="origin float-right">
-              Variety: {{coffee.variety}}
-
+              {{coffee.variety}}
             </p>
           </div>
           <p>
-            Origin: {{coffee.origin}}
+            <strong>Origin:</strong> {{coffee.origin}}
           </p>
         </div>
       </div>
@@ -19,7 +18,9 @@
   </div>
 </div>
 
-
+<mat-paginator [length]="50" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]" (page)="onPageChange($event)">
+  >
+</mat-paginator>
 
 <router-outlet></router-outlet>
 

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Coffee } from './model/coffee.model';
@@ -14,6 +15,10 @@ export class AppComponent {
   error$: Observable<string>;
   data$: Observable<Coffee[]>;
   coffeeList: Coffee[];
+  visibleCoffeeList: Coffee[];
+
+
+  @ViewChild('paginator') paginator: MatPaginator;
 
   constructor(private store: Store<{ rootState: RootState }>) {
     this.error$ = this.store.select(fromRoot.getStateError);
@@ -26,6 +31,8 @@ export class AppComponent {
     this.data$.subscribe((data: Coffee[]) => {
 
       this.coffeeList = this.deepClone(data);
+      this.visibleCoffeeList = this.coffeeList.slice(0, 10);
+      this.paginator?.firstPage();
     });
   }
 
@@ -33,5 +40,9 @@ export class AppComponent {
     return JSON.parse(JSON.stringify(input));
   }
 
+  onPageChange($event) {
+    this.visibleCoffeeList = this.coffeeList.slice($event.pageIndex * $event.pageSize,
+      $event.pageIndex * $event.pageSize + $event.pageSize);
+  }
 
 }
