@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Coffee } from './model/coffee.model';
+import { fromRoot } from './store';
+import { RootState } from './store/reducer';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'mediumclone-angular';
+  error$: Observable<string>;
+  data$: Observable<any>;
+
+  constructor(private store: Store<{ rootState: RootState }>) {
+    this.error$ = this.store.select(fromRoot.getStateError);
+    this.data$ = this.store.select(fromRoot.getStateSelectedData);
+  }
+
+
+  ngOnInit() {
+    this.store.dispatch(fromRoot.ApiGetMockData({ id: 'randomId' }));
+    this.data$.subscribe((data) => { console.log('data', data) });
+  }
+
+
 }
