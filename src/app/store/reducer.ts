@@ -1,7 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-
-// !! ApiGetMockData and ApiGetMockDataWithError not used because it is handled in ./effects
-import { ApiGetMockData, ApiError, ApiSuccess, ApiGetMockDataWithError } from './actions';
+import { ApiError, ApiSuccess } from './actions';
 
 export interface RootState {
   error: any;
