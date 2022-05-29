@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { map, mergeMap, catchError, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, mergeMap, catchError, tap, exhaustMap, takeUntil } from 'rxjs/operators';
 import { CoffeeService } from 'src/app/services/coffee.service';
+import { fromRoot } from '.';
+import { Coffee } from '../model/coffee.model';
 import { ApiError, ApiGetMockData, ApiSuccess } from './actions';
 
 @Injectable()
@@ -28,6 +30,23 @@ export class RootEffects {
       )
     )
   )
+
+
+  ngrxOnRunEffects(
+    resolvedEffects$: Observable<Coffee[]>
+  ): Observable<Coffee[]> {
+    return this.actions$.pipe(
+      ofType(fromRoot.CoffeePageInit),
+      exhaustMap(() =>
+        resolvedEffects$.pipe(
+          takeUntil(
+            this.actions$.pipe(ofType(fromRoot.CoffeePageDestroyed))
+          )
+        )
+      )
+    );
+  }
+
 
   constructor(
     private actions$: Actions,

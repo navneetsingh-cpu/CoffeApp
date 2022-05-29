@@ -7,7 +7,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects'
-import { RootEffects } from './store/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { fromRoot } from './store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

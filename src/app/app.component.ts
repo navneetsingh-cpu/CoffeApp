@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { RootState } from './store/reducer';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   error$: Observable<string>;
   data$: Observable<Coffee[]>;
   coffeeList: Coffee[] = [];
@@ -26,7 +26,8 @@ export class AppComponent {
   }
 
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.store.dispatch(fromRoot.CoffeePageInit());
     this.store.dispatch(fromRoot.ApiGetMockData());
     this.data$.subscribe((data: Coffee[]) => {
 
@@ -40,9 +41,13 @@ export class AppComponent {
     return JSON.parse(JSON.stringify(input));
   }
 
-  onPageChange($event: PageEvent) {
+  onPageChange($event: PageEvent): void {
     this.visibleCoffeeList = this.coffeeList.slice($event.pageIndex * $event.pageSize,
       $event.pageIndex * $event.pageSize + $event.pageSize);
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(fromRoot.CoffeePageInit());
   }
 
 }
