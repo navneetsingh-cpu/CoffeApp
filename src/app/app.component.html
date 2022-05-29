@@ -1,11 +1,10 @@
-<div class="menu-area section-gap">
-  <div class="container">
-    <h1 class="text-center">IBM Coffees</h1>
+<div class="menu-area">
+  <h1 class="text-center">IBM Coffees</h1>
+
+  <div class="container section-gap">
     <div class="row">
       <div class="col-lg-4" *ngFor="let coffee of visibleCoffeeList">
-
         <app-card [card]="coffee"></app-card>
-
       </div>
     </div>
   </div>
