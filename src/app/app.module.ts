@@ -10,15 +10,10 @@ import { EffectsModule } from '@ngrx/effects'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { fromRoot } from './store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-
 import { CardComponent } from './components/card/card.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpRequestInterceptor } from './http-request-interceptor';
 import { DetailDialogComponent } from './components/detail-dialog/detail-dialog.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -37,11 +32,7 @@ import { DetailDialogComponent } from './components/detail-dialog/detail-dialog.
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([fromRoot.RootEffects]),
     BrowserAnimationsModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatDialogModule,
-    MatListModule,
-    MatButtonModule
+    MaterialModule
   ],
   providers: [
     {

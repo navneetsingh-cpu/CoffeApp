@@ -7,13 +7,7 @@ import { Coffee } from 'src/app/model/coffee.model';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent implements OnInit {
+export class CardComponent{
 
   @Input() card: Coffee;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
