@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 import { CardComponent } from './components/card/card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -39,7 +40,8 @@ import { DetailDialogComponent } from './components/detail-dialog/detail-dialog.
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule
   ],
   providers: [
     {
