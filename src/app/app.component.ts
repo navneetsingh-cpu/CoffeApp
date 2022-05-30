@@ -1,7 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
-import { delay, Observable } from 'rxjs';
+import { delay, Observable, Subject, takeUntil } from 'rxjs';
+import { DetailDialogComponent } from './components/detail-dialog/detail-dialog.component';
 import { Coffee } from './model/coffee.model';
 import { LoadingService } from './services/loading.service';
 import { fromRoot } from './store';
@@ -19,11 +21,13 @@ export class AppComponent implements OnInit, OnDestroy {
   visibleCoffeeList: Coffee[] = [];
   loading = false;
 
+  private ngUnsubscribe = new Subject<void>();
 
   @ViewChild('paginator') paginator: MatPaginator;
 
   constructor(private store: Store<{ rootState: RootState }>,
-    private _loading: LoadingService
+    private _loading: LoadingService,
+    private dialog: MatDialog,
   ) {
     this.error$ = this.store.select(fromRoot.getStateError);
     this.data$ = this.store.select(fromRoot.getStateSelectedData);
@@ -35,7 +39,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(fromRoot.CoffeePageInit());
     this.store.dispatch(fromRoot.ApiGetMockData());
-    this.data$.subscribe((data: Coffee[]) => {
+    this.data$.pipe(takeUntil(this.ngUnsubscribe)
+    ).subscribe((data: Coffee[]) => {
 
       this.coffeeList = this.deepClone(data);
       this.visibleCoffeeList = this.coffeeList?.slice(0, 10);
@@ -60,13 +65,23 @@ export class AppComponent implements OnInit, OnDestroy {
   listenToLoading(): void {
     this._loading.loadingSub
       .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((loading) => {
         this.loading = loading;
       });
   }
-
+  openCoffeeDetail(coffee: Coffee) {
+    this.dialog.open(DetailDialogComponent, {
+      data: coffee,
+    });
+  }
+  /**
+   * Unsubscribe
+   */
   ngOnDestroy() {
     this.store.dispatch(fromRoot.CoffeePageInit());
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

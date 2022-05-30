@@ -10,16 +10,21 @@
   <div class="container section-gap">
     <div class="row">
       <div class="col-lg-4" *ngFor="let coffee of visibleCoffeeList">
-        <app-card [card]="coffee"></app-card>
+        <app-card [card]="coffee" (click)="openCoffeeDetail(coffee)"></app-card>
       </div>
     </div>
   </div>
 </div>
 
 <mat-paginator [length]="50" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]" (page)="onPageChange($event)">
-  >
+
 </mat-paginator>
 
 <router-outlet></router-outlet>
 
 <app-footer class="footer"></app-footer>
+
+
+<ng-template #detailDialogRef>
+  Works
+</ng-template>

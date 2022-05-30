@@ -11,15 +11,20 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { fromRoot } from './store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+
 import { CardComponent } from './components/card/card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpRequestInterceptor } from './http-request-interceptor';
+import { DetailDialogComponent } from './components/detail-dialog/detail-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    CardComponent
+    CardComponent,
+    DetailDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,9 @@ import { HttpRequestInterceptor } from './http-request-interceptor';
     EffectsModule.forRoot([fromRoot.RootEffects]),
     BrowserAnimationsModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatListModule
   ],
   providers: [
     {

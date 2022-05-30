@@ -1,3 +1,5 @@
+@import "../scss/functions";
+
 .footer {
   width: 100%;
   text-align: center;
@@ -6,7 +8,7 @@
 .menu-area {
   background: url(../assets/menu-bg.jpg) center;
   background-size: cover;
-  padding: 120px 0;
+  padding: toRem(120) 0;
 
   h4 {
     color: #222222;
@@ -14,7 +16,9 @@
   }
 
   h1 {
-    padding: 0 0 70px 0;
+    padding: 0 0 toRem(70) 0;
+    color: #b68834;
+    font-weight: bold;
   }
 }
 
