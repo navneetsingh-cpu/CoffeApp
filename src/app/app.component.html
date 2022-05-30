@@ -10,7 +10,7 @@
   <div class="container section-gap">
     <div class="row">
       <div class="col-lg-4" *ngFor="let coffee of visibleCoffeeList">
-        <app-card [card]="coffee" (click)="openCoffeeDetail(coffee)"></app-card>
+        <app-card [card]="coffee" (click)="openCoffeeDetail(coffee)" matTooltip="Click to see details"></app-card>
       </div>
     </div>
   </div>

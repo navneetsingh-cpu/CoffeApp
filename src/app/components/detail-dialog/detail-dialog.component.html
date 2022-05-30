@@ -1,20 +1,29 @@
-<h1 mat-dialog-title class="text-center">Coffee Details</h1>
+<h1 mat-dialog-title class="text-center"><strong>Coffee Details</strong></h1>
 
-<div mat-dialog-content>
-  <mat-list role="list">
-    <mat-list-item role="listitem"><strong>Blend_name: </strong> {{ data.blend_name}}
-    </mat-list-item>
-    <mat-list-item role="listitem"><strong>Id: </strong> {{ data.id}}</mat-list-item>
-    <mat-list-item role="listitem"><strong>Intensifier: </strong> {{ data.intensifier}}
-    </mat-list-item>
-    <mat-list-item role="listitem"><strong>Notes: </strong>{{data.notes}}</mat-list-item>
-    <mat-list-item role="listitem"><strong>Origin: </strong> {{data.origin}}
-    </mat-list-item>
-    <mat-list-item role="listitem"><strong>Variety: </strong> {{data.variety}}
-    </mat-list-item>
-  </mat-list>
-</div>
+<mat-card class="pt-2">
+  <mat-card-title>Variety: {{data.variety}}</mat-card-title>
+  <mat-card-subtitle>Blend: {{data.blend_name}}</mat-card-subtitle>
+  <mat-divider inset></mat-divider>
+  <mat-card-content>
+    <p class="pt-2">{{data.notes}}</p>
+  </mat-card-content>
+
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Additional Information
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p><strong>Origin: </strong> {{data.origin}} </p>
+      <p><strong>Id: </strong> {{ data.id}} </p>
+      <p><strong>UUId: </strong> {{ data.uid}} </p>
+      <p><strong>Intensifier: </strong> {{ data.intensifier}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
 
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-raised-button mat-dialog-close class="mx-auto">Close</button>
 </div>

@@ -1,8 +1,9 @@
 @import "../../../scss/functions";
+@import "../../../scss/variables";
 
 .single-menu {
   background-color: #fff;
-  box-shadow: 0 toRem(10) toRem(30) 0 rgba(182, 136, 52, 0.2);
+  box-shadow: 0 toRem(10) toRem(30) 0 $primary-shadow;
   border-radius: toRem(10);
   padding: toRem(20) toRem(30);
   margin-bottom: toRem(30);
@@ -14,12 +15,12 @@
   }
   svg {
     margin-bottom: toRem(10);
-    fill: #b68834;
+    fill: $primary-color;
     float: right;
   }
 
   .origin {
-    color: #b68834;
+    color: $primary-color;
     font-size: toRem(18);
     font-weight: 600;
   }

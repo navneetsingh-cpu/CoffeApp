@@ -1,4 +1,5 @@
 @import "../scss/functions";
+@import "../scss/variables";
 
 .footer {
   width: 100%;
@@ -17,7 +18,7 @@
 
   h1 {
     padding: 0 0 toRem(70) 0;
-    color: #b68834;
+    color: $primary-color;
     font-weight: bold;
   }
 }
