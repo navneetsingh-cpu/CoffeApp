@@ -10,11 +10,9 @@ import { ApiError, ApiGetMockData, ApiSuccess } from './actions';
 @Injectable()
 export class RootEffects {
 
-  /*
-  To handle the behaviour of the Effect when different Action instances
-  occurs on the same effect you can change mergeMap to other operators
-  */
-
+  /**
+   * Effect to fetch List of coffees
+   */
   getMockDataEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(ApiGetMockData),
@@ -31,7 +29,9 @@ export class RootEffects {
     )
   )
 
-
+  /**
+   * To Unsubsribe
+   */
   ngrxOnRunEffects(
     resolvedEffects$: Observable<Coffee[]>
   ): Observable<Coffee[]> {

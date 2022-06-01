@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { FooterComponent } from './components/footer/footer.component';
@@ -24,7 +23,6 @@ import { MaterialModule } from './material.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({
       rootState: fromRoot.rootReducer
